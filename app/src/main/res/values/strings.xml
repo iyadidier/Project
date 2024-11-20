@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Final Project - Avengers Game</string>
+    <string name="avenger_guessing_game">Avenger Guessing Game</string>
 
+    <!-- Add this missing string resource -->
+    <string name="character_image">Character Image</string>
 </resources>
