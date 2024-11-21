@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Final Project - Avengers Game</string>
-
+    <string name="info_menu">Info</string>
+    <string name="latest_score">Latest Score:</string>
+    <string name="lowest_score">Lowest Score:</string>
+    <string name="highest_score">Highest Score:</string>
+    <string name="play_button">Play</string>
 </resources>
