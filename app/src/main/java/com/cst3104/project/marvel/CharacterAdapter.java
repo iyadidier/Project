@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.ViewHolder> {
 
-    private List<String> characterNames;  // List to hold character names
+    private List<GameActivity.CharacterItem> characterNames;  // List to hold character names
     private OnOptionClickListener onOptionClickListener;  // Listener for item click events
 
     // Interface for item click handling
@@ -20,7 +20,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.View
     }
 
     // Constructor for the adapter
-    public CharacterAdapter(List<String> characterNames, OnOptionClickListener onOptionClickListener) {
+    public CharacterAdapter(List<GameActivity.CharacterItem> characterNames, OnOptionClickListener onOptionClickListener) {
         this.characterNames = characterNames;
         this.onOptionClickListener = onOptionClickListener;
     }
@@ -35,7 +35,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // Get the character name for the current position
-        String characterName = characterNames.get(position);
+        String characterName = String.valueOf(characterNames.get(position));
 
         // Set the character name in the corresponding view
         holder.characterNameText.setText(characterName);

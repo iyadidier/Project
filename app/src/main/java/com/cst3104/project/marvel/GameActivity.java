@@ -12,10 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.core.content.ContextCompat;
 
 import com.cst3104.project.R;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -30,7 +31,7 @@ public class GameActivity extends AppCompatActivity {
             "Hawkeye", "Hulk", "Hyperion", "Iron Man", "Justin Hammer", "Karl Mordo"
     };
 
-    // Array of character images (make sure these images exist in your drawable folder)
+    // Array of character images (ensure these images exist in your drawable folder)
     private final int[] characterImages = {
             R.drawable.agent_13, R.drawable.agent_coulson, R.drawable.agent_maria_hill,
             R.drawable.ancient_one, R.drawable.ant_man, R.drawable.ayesha, R.drawable.black_panther,
@@ -96,33 +97,38 @@ public class GameActivity extends AppCompatActivity {
     private void loadNewCharacter() {
         // Reset answer chosen flag and background color
         isAnswerChosen = false;
-        optionsRecyclerView.setBackgroundColor(getResources().getColor(android.R.color.white));
+        optionsRecyclerView.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white));
 
         // Randomly select a character
         Random random = new Random();
         correctAnswerIndex = random.nextInt(characterNames.length);
         currentCharacterName = characterNames[correctAnswerIndex];
 
-        // Shuffle the character names for guessing options
-        List<String> namesList = Arrays.asList(characterNames);
-        Collections.shuffle(namesList);
+        // Pair character names with their images
+        List<CharacterItem> characterItems = new ArrayList<>();
+        for (int i = 0; i < characterNames.length; i++) {
+            characterItems.add(new CharacterItem(characterNames[i], characterImages[i]));
+        }
 
-        // Get the correct position after shuffle
-        final String correctName = characterNames[correctAnswerIndex];
-        final int correctAnswerPosition = namesList.indexOf(correctName);
+        // Shuffle the character items list
+        Collections.shuffle(characterItems);
 
-        // Set up the adapter with the shuffled list of names
-        characterAdapter = new CharacterAdapter(namesList, (name, position) -> {
+        // Find the new correct answer position after shuffle
+        final String correctName = currentCharacterName;
+        final int correctAnswerPosition = findCorrectAnswerPosition(characterItems, correctName);
+
+        // Set up the adapter with the shuffled list of character names and images
+        characterAdapter = new CharacterAdapter(characterItems, (name, position) -> {
             if (!isAnswerChosen) {
                 // Check the user's answer
                 if (position == correctAnswerPosition) {
                     Toast.makeText(GameActivity.this, "Correct!", Toast.LENGTH_SHORT).show();
-                    optionsRecyclerView.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
+                    optionsRecyclerView.setBackgroundColor(ContextCompat.getColor(GameActivity.this, android.R.color.holo_green_light));
                     characterNameDisplay.setText(currentCharacterName);
                     score++;
                 } else {
                     Toast.makeText(GameActivity.this, "Wrong!", Toast.LENGTH_SHORT).show();
-                    optionsRecyclerView.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
+                    optionsRecyclerView.setBackgroundColor(ContextCompat.getColor(GameActivity.this, android.R.color.holo_red_light));
                 }
                 isAnswerChosen = true;
                 updateScore();
@@ -132,8 +138,17 @@ public class GameActivity extends AppCompatActivity {
         // Set the adapter for RecyclerView
         optionsRecyclerView.setAdapter(characterAdapter);
 
-        // Update character image
-        characterImage.setImageResource(characterImages[correctAnswerIndex]);
+        // Update the character image
+        characterImage.setImageResource(characterItems.get(correctAnswerPosition).getImageResId());
+    }
+
+    private int findCorrectAnswerPosition(List<CharacterItem> characterItems, String correctName) {
+        for (int i = 0; i < characterItems.size(); i++) {
+            if (characterItems.get(i).getName().equals(correctName)) {
+                return i;
+            }
+        }
+        return -1; // This should never happen if everything is set up correctly
     }
 
     private void updateScore() {
@@ -162,6 +177,30 @@ public class GameActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             Toast.makeText(this, "No browser found", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Helper class to hold character name and image resource id
+    static class CharacterItem {
+        private String name;
+        private int imageResId;
+
+        public CharacterItem(String name, int imageResId) {
+            this.name = name;
+            this.imageResId = imageResId;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getImageResId() {
+            return imageResId;
+        }
+
+        @Override
+        public String toString() {
+            return name;  // Override toString() to return the character's name
         }
     }
 }
