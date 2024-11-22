@@ -12,7 +12,7 @@ public class AvengerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_avenger);
+        setContentView(R.layout.activity_login);
 
         // Data source
         ArrayList<Marvel> avengers = Marvel.readData(this);
