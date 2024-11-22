@@ -1,6 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <!-- Base application theme with action bar -->
     <style name="Theme.FinalProject" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+
+    <!-- Base application theme -->
+    <style name="Theme.FinalProject" parent="Theme.MaterialComponents.DayNight.NoActionBar"> <!-- Changed from DarkActionBar to NoActionBar -->
+        <!-- Disable the default ActionBar to use a custom Toolbar -->
+        <item name="windowActionBar">false</item>
+
+
         <!-- Primary brand color -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -13,6 +21,7 @@
 
         <!-- Status bar color -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
 
         <!-- Customize your theme here -->
     </style>
@@ -31,6 +40,7 @@
 
         <!-- Status bar color -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
 
         <!-- Customize your theme here -->
     </style>
