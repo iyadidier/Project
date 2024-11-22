@@ -1,3 +1,10 @@
+/** * Full Name: didier iyamuremye*
+ * Student ID:041104829 *
+ * Course: CST3104 *
+ * Term: Fall 2024 *
+ * Assignment: Team Project *
+ * Date : 21/11/24*/
+
 package com.cst3104.project.marvel;
 
 import android.content.Intent;
@@ -46,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     private void showInfoDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("About the App")
-                .setMessage("This is a collaborative project by Team XYZ.\n\nAuthors:\n- Didier\n- Teammates")
+                .setMessage("This is a collaborative project by\n\n- Didier\n- Ugo")
                 .setPositiveButton("OK", null)
                 .show();
     }
