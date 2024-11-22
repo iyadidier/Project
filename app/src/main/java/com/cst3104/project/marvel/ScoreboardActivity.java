@@ -1,7 +1,5 @@
 package com.cst3104.project.marvel;
 
-package com.cst3104.project.marvel;
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
