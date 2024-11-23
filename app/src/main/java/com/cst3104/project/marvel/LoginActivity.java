@@ -1,16 +1,12 @@
-/** * Full Name: didier iyamuremye*
- * Student ID:041104829 *
- * Course: CST3104 *
- * Term: Fall 2024 *
- * Assignment: Team Project *
- * Date : 21/11/24*/
-
 package com.cst3104.project.marvel;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,16 +17,38 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);  // Make sure this is the correct layout
+        setContentView(R.layout.activity_login); // Make sure this is the correct layout file
 
         // Initialize the toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);  // Ensure the toolbar has this ID in the XML
-        setSupportActionBar(toolbar);  // Set the toolbar as the action bar
+        Toolbar toolbar = findViewById(R.id.toolbar); // Ensure the toolbar has this ID in the XML
+        setSupportActionBar(toolbar);
 
         // Optional: Set a title on the toolbar
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Login");
         }
+
+        // Find the login button (ensure it exists in your layout file)
+        Button loginButton = findViewById(R.id.loginButton);
+
+        // Set click listener for the login button
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Example: Perform login validation (dummy check here)
+                boolean isAuthenticated = true; // Replace with actual authentication logic
+
+                if (isAuthenticated) {
+                    // Navigate to DashboardActivity
+                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                    startActivity(intent);
+                    finish(); // Optional: Close LoginActivity
+                } else {
+                    // Show error message
+                    Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -44,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle menu item clicks
         if (item.getItemId() == R.id.action_info) {
-            showInfoDialog();  // Show info dialog when the menu item is clicked
+            showInfoDialog(); // Show info dialog when the menu item is clicked
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -34,12 +34,21 @@ public class DashboardActivity extends AppCompatActivity {
 
         // Fetch and display scores using ViewModel
         ScoreViewModel scoreViewModel = new ViewModelProvider(this).get(ScoreViewModel.class);
-        scoreViewModel.getLatestScore().observe(this, score ->
-                latestScore.setText("Latest Score: " + score));
-        scoreViewModel.getLowestScore().observe(this, score ->
-                lowestScore.setText("Lowest Score: " + score));
-        scoreViewModel.getHighestScore().observe(this, score ->
-                highestScore.setText("Highest Score: " + score));
+        scoreViewModel.getLatestScore().observe(this, score -> {
+            if (score != null) {
+                latestScore.setText("Latest Score: " + score.getScore());
+            }
+        });
+        scoreViewModel.getLowestScore().observe(this, score -> {
+            if (score != null) {
+                lowestScore.setText("Lowest Score: " + score.getScore());
+            }
+        });
+        scoreViewModel.getHighestScore().observe(this, score -> {
+            if (score != null) {
+                highestScore.setText("Highest Score: " + score.getScore());
+            }
+        });
 
         // Play button functionality
         playButton.setOnClickListener(v -> {

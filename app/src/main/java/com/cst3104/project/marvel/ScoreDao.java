@@ -1,11 +1,3 @@
-/**
- * Full Name: Didier Iyamuremye
- * Student ID: 041104829
- * Course: CST3104
- * Term: Fall 2024
- * Assignment: Team Project
- * Date: 21/11/24
- */
 package com.cst3104.project.marvel;
 
 import androidx.lifecycle.LiveData;
@@ -19,11 +11,20 @@ import java.util.List;
 public interface ScoreDao {
 
     @Insert
-    void insert(Score score); // Insert a new score into the database
+    void insert(Score score);
 
     @Query("SELECT * FROM score_table ORDER BY date DESC")
-    LiveData<List<Score>> getAllScores(); // Retrieve all scores, ordered by date in descending order
+    LiveData<List<Score>> getAllScores();
+
+    @Query("SELECT * FROM score_table ORDER BY date DESC LIMIT 1")
+    LiveData<Score> getLatestScore();
+
+    @Query("SELECT * FROM score_table ORDER BY score ASC LIMIT 1")
+    LiveData<Score> getLowestScore();
+
+    @Query("SELECT * FROM score_table ORDER BY score DESC LIMIT 1")
+    LiveData<Score> getHighestScore();
 
     @Query("DELETE FROM score_table")
-    void deleteAll(); // Delete all scores from the database
+    void deleteAll();
 }

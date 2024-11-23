@@ -1,65 +1,53 @@
-/**
- * Full Name: Didier Iyamuremye
- * Student ID: 041104829
- * Course: CST3104
- * Term: Fall 2024
- * Assignment: Team Project
- * Date: 21/11/24*/
 package com.cst3104.project.marvel;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
-import java.util.Date;
 
 @Entity(tableName = "score_table")
-@TypeConverters(Converters.class)  // Ensure the converter is applied to this entity
 public class Score {
 
     @PrimaryKey(autoGenerate = true)
-    private int id; // Unique identifier for each score entry
+    private int id;
+    private int score;
+    private String userName;
+    private long date;  // Timestamp for when the score was recorded
 
-    private String username; // Username of the player
-    private int score; // The score value
-    private Date date; // Date when the score was recorded
-
-    // Constructor
-    public Score(String username, int score, Date date) {
-        this.username = username;
+    // Constructor, getters, and setters
+    public Score(int score, String userName, long date) {
         this.score = score;
+        this.userName = userName;
         this.date = date;
     }
 
-    // Getters and Setters
     public int getId() {
-        return id; // Get the unique ID of the score
+        return id;
     }
 
     public void setId(int id) {
-        this.id = id; // Set the unique ID of the score
-    }
-
-    public String getUsername() {
-        return username; // Get the username
-    }
-
-    public void setUsername(String username) {
-        this.username = username; // Set the username
+        this.id = id;
     }
 
     public int getScore() {
-        return score; // Get the score value
+        return score;
     }
 
     public void setScore(int score) {
-        this.score = score; // Set the score value
+        this.score = score;
     }
 
-    public Date getDate() {
-        return date; // Get the date of the score
+    public String getUserName() {
+        return userName;
     }
 
-    public void setDate(Date date) {
-        this.date = date; // Set the date of the score
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public long getDate() {
+        return date;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
     }
 }

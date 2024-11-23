@@ -1,5 +1,6 @@
-
 package com.cst3104.project.marvel;
+
+import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -11,8 +12,9 @@ public class ScoreboardViewModel extends ViewModel {
     private final ScoreRepository scoreRepository;
 
     // Constructor to initialize the repository
-    public ScoreboardViewModel() {
-        scoreRepository = new ScoreRepository(); // Assuming ScoreRepository manages Room interactions
+    public ScoreboardViewModel(Application application) {
+        // Pass the application context to the repository
+        scoreRepository = new ScoreRepository(application); // Now properly initialized
     }
 
     // Expose the user scores as LiveData
