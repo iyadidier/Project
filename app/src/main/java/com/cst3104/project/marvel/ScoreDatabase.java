@@ -7,11 +7,12 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 @Database(entities = {Score.class}, version = 1, exportSchema = false)
 public abstract class ScoreDatabase extends RoomDatabase {
 
-    public static Executor databaseWriteExecutor;
+    public static Executor databaseWriteExecutor = Executors.newFixedThreadPool(4);
 
     public abstract ScoreDao scoreDao();
 

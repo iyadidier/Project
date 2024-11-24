@@ -17,7 +17,7 @@ public class ScoreRepository {
     public ScoreRepository(Application application) {
         ScoreDatabase database = ScoreDatabase.getDatabase(application);
         scoreDao = database.scoreDao();
-        allScores = scoreDao.getAllScores();
+        allScores = scoreDao.getAllScores();  // This will fetch all scores from the database
         latestScore = scoreDao.getLatestScore();
         lowestScore = scoreDao.getLowestScore();
         highestScore = scoreDao.getHighestScore();
@@ -45,7 +45,13 @@ public class ScoreRepository {
         return highestScore;
     }
 
+    // Method to fetch the highest score for each user
+    public LiveData<List<Score>> getHighestScoreForUser() {
+        return scoreDao.getHighestScoreForUser();  // This method should be added in the ScoreDao
+    }
+
+    // Returning the list of all scores, now properly set up
     public LiveData<List<Score>> getAllUserScores() {
-        return null;
+        return allScores;  // Return the LiveData containing all scores
     }
 }

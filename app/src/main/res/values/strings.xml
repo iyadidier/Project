@@ -1,15 +1,19 @@
 <resources>
     <string name="app_name">Final Project - Avengers Game</string>
-
     <string name="avenger_guessing_game">Avenger Guessing Game</string>
-
-
     <string name="character_image">Character Image</string>
-
     <string name="info_menu">Info</string>
     <string name="latest_score">Latest Score:</string>
     <string name="lowest_score">Lowest Score:</string>
     <string name="highest_score">Highest Score:</string>
     <string name="play_button">Play</string>
 
+    <!-- Error messages and dialog titles -->
+    <string name="username_required">Username cannot be empty</string>
+    <string name="error_username_short">Username must be at least 3 characters</string>
+    <string name="app_information_title">About the App</string>
+    <string name="app_information_message">This is a collaborative project by\n\n- Didier\n- Ugo</string>
+    <string name="OK">OK</string>
+    <string name="Exit_App">Exit App</string>
+    <string name="exit_app_message">Are you sure you want to exit the app?</string>
 </resources>

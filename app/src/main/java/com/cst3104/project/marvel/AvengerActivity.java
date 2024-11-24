@@ -18,12 +18,14 @@ public class AvengerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Enable edge-to-edge display (immersive mode) for the activity
         EdgeToEdge.enable(this);
+
+        // layout for activity
         setContentView(R.layout.activity_login);
 
-        // Data source
+        //  Marvel data from a source
         ArrayList<Marvel> avengers = Marvel.readData(this);
-
-
     }
 }

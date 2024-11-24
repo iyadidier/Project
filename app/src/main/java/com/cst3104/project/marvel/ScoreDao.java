@@ -22,9 +22,13 @@ public interface ScoreDao {
     @Query("SELECT * FROM score_table ORDER BY score ASC LIMIT 1")
     LiveData<Score> getLowestScore();
 
-    @Query("SELECT * FROM score_table ORDER BY score DESC LIMIT 1")
-    LiveData<Score> getHighestScore();
+    // This query will return the highest score for each user
+    @Query("SELECT * FROM score_table WHERE userName IN (SELECT userName FROM score_table GROUP BY userName ORDER BY MAX(score) DESC) ORDER BY score DESC")
+    LiveData<List<Score>> getHighestScoreForUser();
 
     @Query("DELETE FROM score_table")
     void deleteAll();
+
+    @Query("SELECT * FROM score_table ORDER BY score DESC LIMIT 1")
+    LiveData<Score> getHighestScore();
 }

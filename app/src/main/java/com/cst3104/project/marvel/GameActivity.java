@@ -9,11 +9,13 @@ package com.cst3104.project.marvel;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,7 +39,7 @@ public class GameActivity extends AppCompatActivity {
             "Hawkeye", "Hulk", "Hyperion", "Iron Man", "Justin Hammer", "Karl Mordo"
     };
 
-    // Array of character images (ensure these images exist in your drawable folder)
+    // Array of character images
     private final int[] characterImages = {
             R.drawable.agent_13, R.drawable.agent_coulson, R.drawable.agent_maria_hill,
             R.drawable.ancient_one, R.drawable.ant_man, R.drawable.ayesha, R.drawable.black_panther,
@@ -101,7 +103,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void loadNewCharacter() {
-        // Reset answer chosen flag and background color
+        // Reset the game-related flags and UI elements
         isAnswerChosen = false;
         optionsRecyclerView.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white));
 
@@ -126,18 +128,23 @@ public class GameActivity extends AppCompatActivity {
         // Set up the adapter with the shuffled list of character names and images
         characterAdapter = new CharacterAdapter(characterItems, (name, position) -> {
             if (!isAnswerChosen) {
-                // Check the user's answer
                 if (position == correctAnswerPosition) {
+                    // Correct answer
                     Toast.makeText(GameActivity.this, "Correct!", Toast.LENGTH_SHORT).show();
                     optionsRecyclerView.setBackgroundColor(ContextCompat.getColor(GameActivity.this, android.R.color.holo_green_light));
                     characterNameDisplay.setText(currentCharacterName);
-                    score++;
+                    score++;  // Increment score
+                    updateScore();  // Update score immediately
+
+                    // Automatically move to the next character after a short delay
+                    new Handler().postDelayed(GameActivity.this::loadNewCharacter, 1000);  // 1-second delay
                 } else {
+                    // Incorrect answer
                     Toast.makeText(GameActivity.this, "Wrong!", Toast.LENGTH_SHORT).show();
                     optionsRecyclerView.setBackgroundColor(ContextCompat.getColor(GameActivity.this, android.R.color.holo_red_light));
                 }
-                isAnswerChosen = true;
-                updateScore();
+
+                isAnswerChosen = true;  // Prevent further selections
             }
         });
 
@@ -186,7 +193,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    // Helper class to hold character name and image resource id
+    //  class to hold character name and image resource id
     static class CharacterItem {
         private String name;
         private int imageResId;

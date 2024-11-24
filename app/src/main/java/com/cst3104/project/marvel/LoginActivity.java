@@ -1,51 +1,84 @@
+/** Full Name: Didier Iyamuremye
+ * Student ID: 041104829
+ * Course: CST3104
+ * Term: Fall 2024
+ * Assignment: Team Project
+ * Date: 21/11/24*/
 package com.cst3104.project.marvel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import com.cst3104.project.R;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private EditText usernameEditText;  // Input field for username
+    private static final String SHARED_PREFS_FILE = "UserPrefs";  // File to store user preferences
+    private static final String KEY_LAST_USERNAME = "lastUsername";  // Key to store the last used username
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login); // Make sure this is the correct layout file
+        setContentView(R.layout.activity_login);  // Set the layout for this activity
 
-        // Initialize the toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar); // Ensure the toolbar has this ID in the XML
+        // Initialize the toolbar, which is used for the app's top navigation bar
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Optional: Set a title on the toolbar
+        // Set the title of the action bar
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Login");
+            getSupportActionBar().setTitle(R.string.avenger_guessing_game);
         }
 
-        // Find the login button (ensure it exists in your layout file)
-        Button loginButton = findViewById(R.id.loginButton);
+        // Initialize the EditText where the user will input their username
+        usernameEditText = findViewById(R.id.usernameEditText);
 
-        // Set click listener for the login button
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        // Load the last entered username from SharedPreferences (if it exists)
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS_FILE, MODE_PRIVATE);
+        String lastUsername = sharedPreferences.getString(KEY_LAST_USERNAME, "");
+        if (!lastUsername.isEmpty()) {
+            usernameEditText.setText(lastUsername); // Auto-fill the username field with the last used username
+        }
+
+        // Set an OnClickListener for the login button
+        findViewById(R.id.loginButton).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // Example: Perform login validation (dummy check here)
-                boolean isAuthenticated = true; // Replace with actual authentication logic
+            public void onClick(View v) {
+                String username = usernameEditText.getText().toString().trim();  // Get the username entered by the user
 
-                if (isAuthenticated) {
-                    // Navigate to DashboardActivity
-                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                    startActivity(intent);
-                    finish(); // Optional: Close LoginActivity
+                // Validate the username
+                if (username.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Username cannot be empty", Toast.LENGTH_SHORT).show();  // Show toast if the username is empty
+                } else if (username.length() < 3) {
+                    Toast.makeText(LoginActivity.this, "Username must be at least 3 characters", Toast.LENGTH_SHORT).show();  // Show toast if the username is too short
                 } else {
-                    // Show error message
-                    Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
+                    // Save the username to SharedPreferences for future use
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(KEY_LAST_USERNAME, username);
+                    editor.apply();
+
+                    // Create an intent to navigate to the next activity
+                    Intent intent;
+                    if (username.equalsIgnoreCase("admin")) {
+                        intent = new Intent(LoginActivity.this, ScoreboardActivity.class);  // If the username is "admin", go to the scoreboard
+                    } else {
+                        intent = new Intent(LoginActivity.this, DashboardActivity.class);  // Otherwise, go to the dashboard
+                    }
+
+                    intent.putExtra("username", username);  // Pass the username to the next activity
+                    startActivity(intent);  // Start the next activity
+                    finish();  // Close LoginActivity
                 }
             }
         });
@@ -53,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu
+        // Inflate the menu with the info option
         getMenuInflater().inflate(R.menu.menu_info, menu);
         return true;
     }
@@ -62,17 +95,19 @@ public class LoginActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle menu item clicks
         if (item.getItemId() == R.id.action_info) {
-            showInfoDialog(); // Show info dialog when the menu item is clicked
+            // Show an info dialog when the "Info" menu item is clicked
+            showInfoDialog();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    // Method to display the info dialog with details about the app
     private void showInfoDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("About the App")
-                .setMessage("This is a collaborative project by\n\n- Didier\n- Ugo")
-                .setPositiveButton("OK", null)
+                .setMessage("This is a collaborative project by\n\n- Didier\n- Ugo")  // Information about the app and contributors
+                .setPositiveButton("OK", null)  // Button to close the dialog
                 .show();
     }
 }
