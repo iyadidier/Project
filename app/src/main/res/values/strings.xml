@@ -1,9 +1,49 @@
 <resources>
+    <!-- App and Screen Titles -->
     <string name="app_name">Final Project - Avengers Game</string>
-    <string name="info_menu">Info</string>
-    <string name="latest_score">Latest Score:</string>
-    <string name="lowest_score">Lowest Score:</string>
-    <string name="highest_score">Highest Score:</string>
-    <string name="play_button">Play</string>
+    <string name="avenger_guessing_game">Avenger Guessing Game</string>
 
+    <!-- Login Screen -->
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="username_required">Username is required</string>
+    <string name="error_username_short">Username must be at least 3 characters</string>
+    <string name="Exit_App">Exit App</string>
+    <string name="exit_app_message">Are you sure you want to exit?</string>
+
+    <!-- Dashboard Screen -->
+    <string name="latest_score">Latest Score: %1$d</string>
+    <string name="highest_score">Highest Score: %1$d</string>
+    <string name="lowest_score">Lowest Score: %1$d</string>
+    <string name="dashboard_welcome">Welcome, %1$s!</string>
+    <string name="play_button">Play Game</string>
+
+    <!-- Game Messages -->
+    <string name="already_guessed_correctly">You already guessed correctly! Reset to play again.</string>
+    <string name="correct_guess">Correct! Well done!</string>
+    <string name="incorrect_guess">Incorrect.</string>
+    <string name="no_character_selected">No character selected!</string>
+    <string name="no_browser_found">No browser found.</string>
+    <string name="game_reset">Game reset! Starting a new round.</string>
+    <string name="score_format">Score: %1$d</string>
+
+    <!-- Menu Items -->
+    <string name="info">Info</string>
+    <string name="menu_reset">Reset Game</string>
+    <string name="menu_wikipedia">View Wikipedia</string>
+
+    <!-- Accessibility and Descriptions -->
+    <string name="character_image_description">Character image</string>
+    <string name="character_name">Character Name</string>
+
+    <!-- App Information -->
+    <string name="app_information_title">About the App</string>
+    <string name="app_information_message">This is the Avengers Guessing Game app.\nDeveloped by Chris Mugabo and Bethel Yohannes.</string>
+
+    <!-- Additional Strings -->
+    <string name="character_image" translatable="false">character</string>
+    <string name="clear_scores" translatable="false">Clear Scores</string>
+    <string name="user" translatable="false">User:</string>
+    <string name="score" translatable="false">Score:</string>
+    <string name="OK">Ok</string>
 </resources>

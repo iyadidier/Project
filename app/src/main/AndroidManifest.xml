@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -10,18 +9,38 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FinalProject"
+        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
         tools:targetApi="31">
+
+        <!-- Main launcher activity for Login -->
         <activity
-            android:name=".marvel.AvengerActivity"
-            android:exported="true" >
+            android:name=".marvel.LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-    </application>
+        <!-- DashboardActivity -->
+        <activity
+            android:name=".marvel.DashboardActivity"
+            android:exported="true" />
 
+        <!-- AvengerActivity -->
+        <activity
+            android:name=".marvel.AvengerActivity"
+            android:exported="true" />
+
+        <!-- GameActivity -->
+        <activity
+            android:name=".marvel.GameActivity"
+            android:exported="true" />
+
+        <!-- ScoreboardActivity -->
+        <activity
+            android:name=".marvel.ScoreboardActivity"
+            android:exported="true" />
+
+    </application>
 </manifest>
