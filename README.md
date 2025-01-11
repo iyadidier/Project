@@ -31,5 +31,5 @@ The **Avengers Character Guessing Game** is an interactive Android application w
 
 1. **Clone the Repository**  
    ```bash
-   git clone https://github.com/yourusername/avengers-game.git
+   git clone https://github.com/myhavok/avengers-game.git
    cd avengers-game
