@@ -1,7 +1,7 @@
 # Avengers Character Guessing Game 🎮
 
 ## Overview  
-The **Avengers Character Guessing Game** is an interactive Android application where players guess the names of randomly selected Avengers characters based on their images. The game tracks player performance, maintains score history, and includes additional features like user authentication and localization.  
+The **Avengers Character Guessing Game** is an interactive Android application where players guess the names of randomly selected Avengers characters based on their images. The game tracks player performance, maintains score history, and includes additional features like language accesibility.  
 
 ---
 
